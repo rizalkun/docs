@@ -57,12 +57,30 @@
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Billing",
             "pages": [
               "api-reference/endpoint/get",
               "api-reference/endpoint/create",
               "api-reference/endpoint/delete",
               "api-reference/endpoint/webhook"
+            ]
+          },
+          {
+            "group": "Whatsapp Account",
+            "pages": [
+              "api-reference/endpoint/get"
+            ]
+          },
+          {
+            "group": "Whatsapp Instances (deprecated)",
+            "pages": [
+              "api-reference/endpoint/get"
+            ]
+          },
+          {
+            "group": "Messaging",
+            "pages": [
+              "api-reference/endpoint/get"
             ]
           }
         ]
