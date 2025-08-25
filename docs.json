@@ -63,19 +63,38 @@
             ]
           },
           {
-            "group": "Whatsapp Account",
-            "pages": [
-              "api-reference/endpoint/get"
-            ]
-          },
-          {
-            "group": "Whatsapp Instances (deprecated)",
-            "pages": [
-              "api-reference/endpoint/get"
-            ]
-          },
-          {
             "group": "Messaging",
+            "pages": [
+              {
+                "group": "Whatsapp Account",
+                "pages": [
+                  "api-reference/messaging/account/get",
+                  "api-reference/messaging/account/getgroup",
+                  "api-reference/messaging/account/scanqr"
+                ]
+              },
+              {
+                "group": "Whatsapp Instances (deprecated)",
+                "pages": [
+                  "api-reference/endpoint/get"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Programmable Voice (soon)",
+            "pages": [
+              "api-reference/endpoint/get"
+            ]
+          },
+          {
+            "group": "Email Transactional (soon)",
+            "pages": [
+              "api-reference/endpoint/get"
+            ]
+          },
+          {
+            "group": "Webhook",
             "pages": [
               "api-reference/endpoint/get"
             ]

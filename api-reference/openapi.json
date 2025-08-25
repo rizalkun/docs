@@ -1,420 +1,422 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
-    "title": "Zuwinda Open API v2",
-    "version": "1.0.0",
-    "description": ""
+    "title": "OpenAPI Plant Store",
+    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "api.zuwinda.com"
+      "url": "https://api.zuwinda.com/v2"
+    }
+  ],
+  "security": [
+    {
+      "ZuwindaToken": []
     }
   ],
   "paths": {
-    "/v2/messaging/whatsapp/accounts": {
-      "parameters": [],
-      "get": {
-        "summary": "get accounts",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/v2/messaging/whatsapp/accounts/groups": {
-      "parameters": [],
-      "get": {
-        "summary": "get groups",
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "query",
-            "required": false,
-            "example": "your accountId",
-            "schema": {
-              "type": "string"
+    "/billing/credit/inquiry": {
+      "post": {
+        "description": "Get your zuwinda credit",
+        "responses": {
+          "200": {
+            "description": "inquiry response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Inquiry"
+                }
+              }
             }
           },
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/v2/messaging/whatsapp/message": {
-      "parameters": [],
-      "post": {
-        "summary": "send message",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "headers": {},
-            "description": "send text"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
-              },
-              "example": null
-            }
-          }
-        }
-      }
-    },
-    "/v2/messaging/whatsapp/accounts/scan-qrcode": {
-      "parameters": [],
-      "post": {
-        "summary": "scan qrcode",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {},
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "accountId": {
-                    "type": "string"
-                  }
+          "401": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
-              },
-              "example": {
-                "accountId": "Your Account ID"
               }
             }
           }
         }
       }
     },
-    "/v2/messaging/whatsapp/instances": {
-      "parameters": [],
+    "/messaging/whatsapp/accounts": {
       "get": {
-        "summary": "get instances",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
+        "description": "Returns all whatsapp accounts from the system that the user has access to",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "whatsapp accounts response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWhatsappAccounts"
+                }
+              }
             }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/v2/messaging/whatsapp/instances/{id}": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "instances_id",
-          "example": "asdsa",
-          "schema": {
-            "type": "string"
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
-      ],
-      "get": {
-        "summary": "get instances by id",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
       }
     },
-    "/v2/messaging/whatsapp/instances/message": {
-      "parameters": [],
-      "post": {
-        "summary": "send message",
+    "/messaging/whatsapp/accounts/groups": {
+      "get": {
+        "description": "Returns all whatsapp groups from the whatsapp accounts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "whatsapp groups response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGroupWhatsappAccounts"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plants": {
+      "get": {
+        "description": "Returns all plants from the system that the user has access to",
         "parameters": [
           {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
+            "name": "limit",
+            "in": "query",
+            "description": "The maximum number of results to return",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "Plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plant"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new plant in the store",
         "requestBody": {
+          "description": "Plant to add to the store",
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
-              },
-              "example": null
+                "$ref": "#/components/schemas/NewPlant"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
         }
       }
     },
-    "/v2/messaging/whatsapp/instances/{id}/start": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "instances id",
-          "example": "your instances id",
-          "schema": {
-            "type": "string"
+    "/plants/{id}": {
+      "delete": {
+        "description": "Deletes a single plant based on the ID supplied",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of plant to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Plant deleted",
+            "content": {}
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
-      ],
-      "post": {
-        "summary": "start instances",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
       }
-    },
-    "/v2/messaging/whatsapp/instances/{id}/restart": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "instances id",
-          "example": "your instances id",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
+    }
+  },
+  "webhooks": {
+    "/plant/webhook": {
       "post": {
-        "summary": "restart instances",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/v2/messaging/whatsapp/instances/{id}/stop": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Instances id",
-          "example": "asdad",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "summary": "stop instances",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/v2/messaging/whatsapp/instances/{id}/scan-qr": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "example": "your instances id",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "summary": "scan qrcode",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/v2/messaging/whatsapp/instances/{id}/get-groups": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "example": "your instances id",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "summary": "get groups",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/v2/messaging/whatsapp/instances/{id}/logout": {
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Instances id",
-          "example": "your instances id",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "post": {
-        "summary": "logout",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/v2/messaging/sms/message": {
-      "parameters": [],
-      "post": {
-        "summary": "send message",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {},
+        "description": "Information about a new plant added to the store",
         "requestBody": {
+          "description": "Plant added to the store",
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/NewPlant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return a 200 status to indicate that the data was received successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Inquiry": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "responseCode": {
+                "type": "string",
+                "example": "00"
               },
-              "example": null
+              "amount": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "GetWhatsappAccounts": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "responseCode": {
+                "type": "string",
+                "example": "00"
+              },
+              "accounts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "accountId": {
+                      "type": "string",
+                      "example": "5bb8427e-afd7-4fd9-bf76-b93cc8aff20e"
+                    },
+                    "accountName": {
+                      "type": "string",
+                      "example": "Zuwinda Bot"
+                    },
+                    "clusterId": {
+                      "type": "string",
+                      "example": "821b80f5-b0f0-4bcf-ad09-89c1575a726d"
+                    },
+                    "whatsapp_number": {
+                      "type": "string",
+                      "example": "628151122333"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "active"
+                    },
+                    "whatsapp_status": {
+                      "type": "string",
+                      "example": "connected"
+                    },
+                    "is_official": {
+                      "type": "boolean"
+                    },
+                    "connection_reason": {
+                      "type": "string",
+                      "example": "Ok"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2024-04-23T12:25:17.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetGroupWhatsappAccounts": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "responseCode": {
+                "type": "string",
+                "example": "00"
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "GroupId": {
+                      "type": "boolean",
+                      "example": "123123123"
+                    },
+                    "OwnerJid": {
+                      "type": "string",
+                      "example": "628151122333"
+                    },
+                    "Name": {
+                      "type": "string",
+                      "example": "Zuwinda Group"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Plant": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the plant",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Tag to specify the type",
+            "type": "string"
+          }
+        }
+      },
+      "NewPlant": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Plant"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "Identification number of the plant",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "responseCode": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "message": {
+                "type": "string"
+              }
             }
           }
         }
       }
     },
-    "/v2/billing/credit/inquiry": {
-      "parameters": [],
-      "post": {
-        "summary": "inquiry",
-        "parameters": [
-          {
-            "name": "X-Access-Key",
-            "in": "header",
-            "required": false,
-            "example": "{{token_external}}",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {}
+    "securitySchemes": {
+      "ZuwindaToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Access-Key",
+        "description": "Your Zuwinda API token"
       }
     }
   }
