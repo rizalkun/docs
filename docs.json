@@ -76,7 +76,13 @@
               {
                 "group": "Whatsapp Instances (deprecated)",
                 "pages": [
-                  "api-reference/endpoint/get"
+                  "api-reference/messaging/instances/get",
+                  "api-reference/messaging/instances/group",
+                  "api-reference/messaging/instances/start",
+                  "api-reference/messaging/instances/stop",
+                  "api-reference/messaging/instances/restart",
+                  "api-reference/messaging/instances/scan",
+                  "api-reference/messaging/instances/logout"
                 ]
               }
             ]
@@ -84,13 +90,13 @@
           {
             "group": "Programmable Voice (soon)",
             "pages": [
-              "api-reference/endpoint/get"
+              "api-reference/voice/get"
             ]
           },
           {
             "group": "Email Transactional (soon)",
             "pages": [
-              "api-reference/endpoint/get"
+              "api-reference/email/get"
             ]
           },
           {

@@ -102,6 +102,400 @@
         }
       }
     },
+    "/messaging/whatsapp/accounts/scan-qrcode": {
+      "post": {
+        "description": "Scan a QR code for Zuwinda Authentication",
+        "requestBody": {
+          "description": "Scan QR code",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "accountId": {
+                    "type": "string",
+                    "example": "5bb8427e-afd7-4fd9-bf76-b93cc8aff20e"
+                  }
+                },
+                "required": [
+                  "accountId"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "QR code scan response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanQRCode"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messaging/whatsapp/instances": {
+      "get": {
+        "description": "Returns all whatsapp instances from the system that the user has access to",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "whatsapp instances response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetWhatsappInstances"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messaging/whatsapp/instances/{id}/get-groups": {
+      "post": {
+        "description": "Returns all whatsapp groups from a specific whatsapp instance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the whatsapp instance",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "whatsapp instances response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGroupWhatsappInstances"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messaging/whatsapp/instances/{id}/start": {
+      "post": {
+        "description": "Starts a specific whatsapp instance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the whatsapp instance",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "whatsapp instances response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "responseCode": {
+                          "type": "string",
+                          "example": "00"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Instance started successfully"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "/messaging/whatsapp/instances/{id}/restart": {
+      "post": {
+        "description": "Restarts a specific whatsapp instance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the whatsapp instance",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "whatsapp instances response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "responseCode": {
+                          "type": "string",
+                          "example": "00"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Instance restarted successfully"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messaging/whatsapp/instances/{id}/stop": {
+      "post": {
+        "description": "Stops a specific whatsapp instance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the whatsapp instance",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "whatsapp instances response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "responseCode": {
+                          "type": "string",
+                          "example": "00"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Instance stopped successfully"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messaging/whatsapp/instances/{id}/logout": {
+      "post": {
+        "description": "Logs out a specific whatsapp instance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the whatsapp instance",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "whatsapp instances response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "responseCode": {
+                          "type": "string",
+                          "example": "00"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Instance logged out successfully"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messaging/whatsapp/instances/{id}/scan-qr": {
+      "post": {
+        "description": "Scans the QR code for a specific whatsapp instance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the whatsapp instance",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "whatsapp instances response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "responseCode": {
+                          "type": "string",
+                          "example": "00"
+                        },
+                        "qrcode_string": {
+                          "type": "string",
+                          "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAIAAAD4nY5HAAAAAXNSR0IArs4c6QAA..."
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/plants": {
       "get": {
         "description": "Returns all plants from the system that the user has access to",
@@ -346,6 +740,129 @@
                     "Name": {
                       "type": "string",
                       "example": "Zuwinda Group"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ScanQRCode": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "responseCode": {
+                "type": "string",
+                "example": "00"
+              },
+              "QRCode": {
+                "type": "string",
+                "example": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAIAAAD..."
+              },
+              "Timeout": {
+                "type": "integer",
+                "example": 60
+              }
+            }
+          }
+        }
+      },
+      "GetWhatsappInstances": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "responseCode": {
+                "type": "string",
+                "example": "00"
+              },
+              "instances": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "instances_id": {
+                      "type": "string",
+                      "example": "5bb8427e-afd7-4fd9-bf76-b93cc8aff20e"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Zuwinda Bot"
+                    },
+                    "cluster_id": {
+                      "type": "string",
+                      "example": "821b80f5-b0f0-4bcf-ad09-89c1575a726d"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "active"
+                    },
+                    "whatsapp_status": {
+                      "type": "string",
+                      "example": "connected"
+                    },
+                    "package_name": {
+                      "type": "string",
+                      "example": "PRO"
+                    },
+                    "subscription_start_date": {
+                      "type": "string",
+                      "example": "2024-04-23T12:25:17.000Z"
+                    },
+                    "subscription_end_date": {
+                      "type": "string",
+                      "example": "2025-04-23T12:25:17.000Z"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2024-04-23T12:25:17.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetGroupWhatsappInstances": {
+        "required": [
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "responseCode": {
+                "type": "string",
+                "example": "00"
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "groupId": {
+                      "type": "string",
+                      "example": "123123123123"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Zuwinda Group"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2024-04-23T12:25:17.000Z"
                     }
                   }
                 }
