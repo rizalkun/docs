@@ -6,11 +6,11 @@ description: "Open API zuwinda.com"
 
 ## Welcome
 
-We’re excited to have you on board. Your integration is now ready, and you can start exploring all the tools and features designed to help you connect, automate, and grow faster.
+This documentation provides guidance for integrating your application with the Zuwinda API. It covers available endpoints, request and response schemas, authentication, error handling, and best practices to ensure reliable and secure integrations.
 
 ## Authentication
 
-All API endpoints are authenticated using Access Key Token and picked up from the specification file.
+All API endpoints require an Access Key. Include the key in each request using the X-Access-Key header. The security scheme is defined in the OpenAPI specification.
 
 ```json
 "security": [
