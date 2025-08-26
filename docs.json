@@ -3,7 +3,7 @@
   "theme": "mint",
   "name": "Zuwinda Open API",
   "colors": {
-    "primary": "#16A34A",
+    "primary": "#377dff",
     "light": "#07C983",
     "dark": "#15803D"
   },
@@ -77,6 +77,11 @@
           "anchor": "Blog",
           "href": "https://blog.zuwinda.com",
           "icon": "newspaper"
+        },
+        {
+          "anchor": "Status",
+          "href": "https://status.zuwinda.com",
+          "icon": "signal-bars"
         }
       ]
     }
